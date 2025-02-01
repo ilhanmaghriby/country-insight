@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+:focus.input {
+  border-color: #9aa6b2;
+}
+
+.hide-scrollbar {
+  overflow-y: scroll;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
