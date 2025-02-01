@@ -188,12 +188,12 @@ function CountryList() {
         <>
           <div className="text-center">
             <h1 className="text-xl text-gray-500">Hi, there👋🏻</h1>
-            <p className="text-2xl font-bold">How Can We Help?</p>
+            <p className="text-2xl font-bold mb-4">How Can We Help?</p>
           </div>
 
           <div className="max-w-screen-lg mx-auto px-4 md:px-8 pb-20">
             <div className={`${showAll ? "hide-scrollbar max-h-[500px]" : ""}`}>
-              <ul className="mt-8 grid gap-3 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 grid-auto-rows-auto">
+              <ul className="mt-8 grid gap-3 md:gap-5 sm:grid-cols-2 lg:grid-cols-3 grid-auto-rows-auto">
                 {displayedCountries?.map((country) => (
                   <li
                     key={country.name}
