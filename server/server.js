@@ -2,8 +2,6 @@ import express from "express";
 import OpenAI from "openai";
 import cors from "cors";
 import dotenv from "dotenv";
-import passport from "passport";
-import GoogleStrategy from "passport-google-oauth20";
 
 dotenv.config();
 
@@ -52,48 +50,6 @@ app.post("/generate", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-// // Authentikasi dengan Google
-// GoogleStrategy.Strategy;
-
-// passport.use(
-//   new GoogleStrategy(
-//     {
-//       clientID: process.env.GOOGLE_CLIENT_ID,
-//       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//       callbackURL: "http://localhost:3000/auth/google/callback",
-//     },
-//     (accessToken, refreshToken, profile, done) => {
-//       // Simpan informasi pengguna ke database atau session
-//       return done(null, profile);
-//     }
-//   )
-// );
-
-// // Routes untuk OAuth
-// app.get(
-//   "/auth/google",
-//   passport.authenticate("google", { scope: ["profile"] })
-// );
-// app.get(
-//   "/auth/google/callback",
-//   passport.authenticate("google", { failureRedirect: "/login" }),
-//   (req, res) => {
-//     // Redirect ke halaman utama setelah login berhasil
-//     res.redirect("/");
-//   }
-// );
-
-// function ensureAuthenticated(req, res, next) {
-//   if (req.isAuthenticated()) {
-//     return next();
-//   }
-//   res.redirect("/login");
-// }
-
-// app.get("/protected", ensureAuthenticated, (req, res) => {
-//   res.send("Welcome to the protected route!");
-// });
 
 // Mulai server di port 3000
 app.listen(3000, () => console.log("Server is running on port 3000"));
