@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+* {
+  overflow: hidden;
+}
 :focus.input {
   border-color: #9aa6b2;
 }
