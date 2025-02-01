@@ -67,6 +67,8 @@ function CountryList() {
       return;
     }
 
+    setInput(""); // Reset kolom input setelah mengirim pesan
+
     // Menandai bahwa chat telah dimulai
     if (!chatStarted) {
       setChatStarted(true);
@@ -110,8 +112,6 @@ function CountryList() {
         },
       ]);
     }
-
-    setInput(""); // Reset kolom input setelah mengirim pesan
   };
 
   if (loading) return <p>Loading...</p>;
@@ -123,7 +123,7 @@ function CountryList() {
     : data?.countries.slice(0, 6);
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Jika chat sudah dimulai, hanya tampilkan chat */}
       {chatStarted ? (
         <div className="flex flex-col min-h-screen">
@@ -146,7 +146,7 @@ function CountryList() {
                   className={`inline-block py-2 px-4 rounded-lg ${
                     msg.role === "user"
                       ? "bg-gray-500 text-white"
-                      : "bg-white text-gray-700"
+                      : "bg-white text-gray-700 border border-gray-300"
                   }`}
                 >
                   {msg.content}
@@ -161,7 +161,7 @@ function CountryList() {
             <div className="relative max-w-md mx-auto">
               <input
                 placeholder="Ask AI"
-                className="input w-full pr-12 pl-3 py-2 bg-white text-gray-500 outline-none border shadow-sm rounded-lg border-gray-400"
+                className="input w-full pr-12 pl-3 py-2 bg-white text-gray-500 outline-none border shadow-sm rounded-lg border-gray-300"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleSend()}
@@ -185,25 +185,24 @@ function CountryList() {
         </div>
       ) : (
         // Jika chat belum dimulai, tampilkan daftar negara
-        <>
+        <div className="min-h-screen place-content-center">
           <div className="text-center">
             <h1 className="text-xl text-gray-500">Hi, there👋🏻</h1>
             <p className="text-2xl font-bold mb-4">How Can We Help?</p>
           </div>
-
-          <div className="max-w-screen-lg mx-auto px-4 md:px-8 pb-20">
+          <div className="max-w-screen-lg mx-auto px-4 md:px-8 pb-20 ">
             <div className={`${showAll ? "hide-scrollbar max-h-[500px]" : ""}`}>
               <ul className="mt-8 grid gap-3 md:gap-5 sm:grid-cols-2 lg:grid-cols-3 grid-auto-rows-auto">
                 {displayedCountries?.map((country) => (
                   <li
                     key={country.name}
-                    className={`border border-gray-300 bg-white shadow rounded-lg transition-all duration-300 self-start ${
+                    className={`border border-gray-200 bg-white shadow rounded-lg transition-all duration-300 self-start ${
                       selectedCountry === country
                         ? "min-h-[200px]"
                         : "min-h-[150px]"
                     }`}
                   >
-                    <div className="flex flex-col justify-between p-4 h-full">
+                    <div className="flex flex-col justify-between p-4 h-full ">
                       <div className="space-y-2">
                         <span>{country.emoji}</span>
                         <h3 className="font-semibold text-center">
@@ -222,6 +221,7 @@ function CountryList() {
                           </span>
                         </h4>
 
+                        {/* Tampilkan informasi tambahan jika negara yang dipilih */}
                         {selectedCountry === country && (
                           <>
                             <h4 className="text-gray-800 text-sm flex justify-between">
@@ -268,11 +268,11 @@ function CountryList() {
           </div>
 
           {/* Input Chat (Awal) */}
-          <div className="fixed bottom-0 w-full p-8 bg-gray-100 shadow-lg z-10">
+          <div className="fixed bottom-0 w-full p-8 bg-white shadow-lg z-10">
             <div className="relative max-w-md mx-auto">
               <input
                 placeholder="Ask AI"
-                className="input w-full pr-12 pl-3 py-2 bg-white text-gray-500 outline-none border shadow-sm rounded-lg border-gray-400"
+                className="input w-full pr-12 pl-3 py-2 bg-white text-gray-500 outline-none border shadow-sm rounded-lg border-gray-300"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleSend()}
@@ -293,7 +293,7 @@ function CountryList() {
               </button>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
