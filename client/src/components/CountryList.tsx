@@ -181,6 +181,7 @@ function CountryList() {
           <div className="w-full p-8 shadow-lg">
             <div className="relative max-w-md mx-auto">
               <input
+                required
                 placeholder="Ask AI"
                 className="input w-full pr-12 pl-3 py-2 bg-white text-gray-500 outline-none border shadow-sm rounded-lg border-gray-300"
                 value={input}
@@ -321,6 +322,7 @@ function CountryList() {
           <div className="fixed bottom-0 w-full p-6 bg-white shadow-lg z-10">
             <div className="relative max-w-md mx-auto">
               <input
+                required
                 placeholder="Ask AI"
                 className="input w-full pr-12 pl-3 py-2 bg-white text-gray-500 outline-none border shadow-sm rounded-lg border-gray-300"
                 value={input}
