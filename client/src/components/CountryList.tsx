@@ -145,14 +145,14 @@ function CountryList() {
       {/* Jika chat sudah dimulai, hanya tampilkan chat */}
       {chatStarted ? (
         <div className="flex flex-col min-h-screen">
-          <div className="p-4 ">
-            <h2 className="text-xl font-semibold text-center">
+          <div className="p-4">
+            <h2 className="text-2xl font-semibold text-center">
               Chat Assistant
             </h2>
           </div>
 
           {/* Area Chat */}
-          <div className="flex-1 py-4 px-8 md:py-12 md:px-28">
+          <div className="flex-1 py-4 px-8 md:px-28">
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -209,8 +209,14 @@ function CountryList() {
             data-aos="fade-up"
             data-aos-duration="800"
           >
-            <h1 className="text-xl text-gray-500">Hi, there👋🏻</h1>
-            <p className="text-2xl font-bold mb-4">How Can We Help?</p>
+            <h1 className="text-xl text-gray-500">
+              Hi there<span className="wave">👋</span>
+            </h1>
+            <div className="grid place-items-center">
+              <h2 className="typing-demo text-2xl font-bold mb-4">
+                How Can We Help?
+              </h2>
+            </div>
           </div>
           <div className="max-w-screen-lg mx-auto px-4 md:px-8 pb-20">
             <div className={`${showAll ? "hide-scrollbar max-h-[500px]" : ""}`}>
