@@ -1,45 +1,74 @@
-**Project Overview**
-This project is a web-based application that allows users to interact with an AI assistant to get information about different countries. The frontend displays a list of countries with their relevant details such as capital, currency, and languages. The user can also initiate a chat with an AI assistant to ask for more detailed information about a specific country. The backend is powered by OpenAI's LLaMA model to generate AI responses based on user queries.
+# Country Insight
 
-**Setup Instructions**
-To set up the project locally, follow these steps:
+## Project Overview
 
-1. Clone the repository
-   git clone https://github.com/ilhanmaghriby/kuasar-project
-   cd kuasar-project
+Country Insight is a web-based application that allows users to interact with an AI assistant to get information about various countries. The frontend displays a list of countries along with details such as capitals, currencies, and languages. Users can also start a conversation with the AI assistant to learn more about a specific country. The backend uses the LLaMA model from OpenAI to generate AI responses based on user queries.
 
-2. Install dependencies
-   For the frontend (React-based):
-   cd client
-   npm install
-   For the backend (Express.js server):
-   cd server
-   npm install
+## Setup Instructions
 
-3. Run the application
-   For the frontend:
-   cd client
-   npm run dev
-   For the backend:
-   cd server
-   node server.js
-   The frontend will be available at http://localhost:5173, and the backend will be running at http://localhost:3000.
+To run this project locally, follow these steps:
 
-**Available Features**
-Country List: Displays a list of countries with basic information such as name, capital, currency, and languages.
-AI Interaction: Allows users to click on a country and ask the AI assistant for more detailed information about that country.
-Responsive Design: The application is responsive and works well across different screen sizes.
-Infinite Scrolling: You can choose to view all countries or limit the view to a few.
+### 1. Clone the repository
 
-**Technical Decisions and Architecture**
-Frontend: Built with React.js and Apollo Client for managing GraphQL queries. The frontend is styled using Tailwind CSS and AOS (Animate On Scroll) for animations.
-Backend: The backend is built using Express.js and OpenAI’s API to handle AI responses. The server listens for POST requests on /generate, processes the input, and sends back an AI-generated response.
-AI Model: We use OpenAI's meta/llama-3.1-405b-instruct model to generate responses to user queries.
+```bash
+git clone https://github.com/ilhanmaghriby/country-insight
+cd country-insight
+```
 
-**Future Improvements**
-User Authentication: Implement user authentication to save user interactions and preferences.
-Multi-Language Support: Enhance the app to support multiple languages for a broader audience.
-Performance Optimizations: Refactor code for better performance, especially with large amounts of data.
-Error Handling: Improve error handling for different edge cases and failures in both frontend and backend.
-Enhanced AI Integration: Integrate additional AI models for more diverse and accurate responses.
-Deployment: Deploy the app on cloud platforms like AWS or Heroku for live access.
+### 2. Install dependencies
+
+#### Frontend (React.js):
+
+```bash
+cd client
+npm install
+```
+
+#### Backend (Express.js):
+
+```bash
+cd server
+npm install
+```
+
+### 3. Run the Application
+
+#### Run the Frontend:
+
+```bash
+cd client
+npm run dev
+```
+
+#### Run the Backend:
+
+```bash
+cd server
+node server.js
+```
+
+The frontend application will be available at `http://localhost:5173`, while the backend will run at `http://localhost:3000`.
+
+## Available Features
+
+- **Country List**: Displays a list of countries with basic information such as name, capital, currency, language, and continent.
+- **AI Interaction**: Users can click on a country and ask the AI assistant for more detailed information.
+- **Responsive Design**: The application is designed to adapt to various screen sizes.
+- **Infinite Scrolling**: Option to view all countries or limit the display as needed.
+
+## Technologies Used
+
+- **Frontend**: Built with React.js, Vite for fast development and bundling, and Apollo Client for GraphQL management. Styling is done with Tailwind CSS, and animations are powered by AOS (Animate On Scroll).
+- **Backend**: Uses Express.js with OpenAI integration to generate AI responses.
+- **AI Model**: Utilizes the `meta/llama-3.1-405b-instruct` model from OpenAI to answer user queries.
+
+## Future Development and Improvements
+
+- **User Authentication**: Implement login/logout functionality to store user interactions.
+- **Multi-Language Support**: Allow users to select the display language.
+- **Performance Optimization**: Improve data processing efficiency for better performance.
+- **Better Error Handling**: More robust error handling for different cases.
+- **Advanced AI Integration**: Add additional AI models for more accurate responses.
+- **Cloud Deployment**: Deploy the application on a cloud platform like AWS or Heroku for public access.
+
+---
