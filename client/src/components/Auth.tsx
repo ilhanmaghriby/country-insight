@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import supabase from "../supabase-client";
-import { Session } from "@supabase/supabase-js"; // Import the Session type
-import { AuthChangeEvent } from "@supabase/supabase-js"; // Import the AuthChangeEvent type
+import { Session } from "@supabase/supabase-js";
+import { AuthChangeEvent } from "@supabase/supabase-js";
 
 export default function Auth() {
-  const [session, setSession] = useState<Session | null>(null); // Define the session type
+  const [session, setSession] = useState<Session | null>(null);
   const [showButton, setShowButton] = useState(false);
 
+  // Function to handle profile click
   const handleProfileClick = () => {
     setShowButton((prevState) => !prevState); // Toggle button visibility
   };
 
+  // Fetch session on component mount
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -20,7 +22,6 @@ export default function Auth() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(
       (_event: AuthChangeEvent, session: Session | null) => {
-        // Type both _event and session
         setSession(session);
       }
     );
@@ -28,11 +29,13 @@ export default function Auth() {
     return () => subscription.unsubscribe();
   }, []);
 
+  // Function to handle logout
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setSession(null);
   };
 
+  // Function to handle login with Google
   const handleLoginWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -42,6 +45,7 @@ export default function Auth() {
     }
   };
 
+  // Render the login/logout button
   if (!session) {
     return (
       <div className="absolute top-0 right-0 mt-3 mr-4">
