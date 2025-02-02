@@ -44,7 +44,7 @@ export default function Login() {
 
   if (!session) {
     return (
-      <div className="flex justify-end mt-3 mr-4">
+      <div className="absolute top-0 right-0 mt-3 mr-4">
         <button
           className="px-4 py-2 border flex gap-2 border-slate-200  rounded-lg text-slate-700  hover:border-slate-400  hover:text-slate-900  hover:shadow transition duration-150"
           onClick={handleLoginWithGoogle}
