@@ -213,7 +213,7 @@ function CountryList() {
               Hi there<span className="wave">👋</span>
             </h1>
             <div className="grid place-items-center">
-              <h2 className="typing-demo text-2xl font-bold mb-2">
+              <h2 className="typing-demo text-2xl font-bold mb-3">
                 How Can We Help?
               </h2>
             </div>
