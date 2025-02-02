@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import CountryList from "./components/CountryList";
-// import Login from "./components/Login";
+import Login from "./components/Login";
 
 // Komponen utama
 function App() {
@@ -12,7 +12,7 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      {/* <Login /> */}
+      <Login />
       <CountryList />
     </ApolloProvider>
   );
