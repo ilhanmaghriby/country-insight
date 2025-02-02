@@ -59,7 +59,7 @@ export default function Auth() {
             loading="lazy"
             alt="google logo"
           />
-          <span>Login with Google</span>
+          <span className="hidden md:inline">Login with Google</span>
         </button>
       </div>
     );
