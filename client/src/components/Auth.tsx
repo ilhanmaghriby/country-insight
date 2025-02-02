@@ -3,7 +3,7 @@ import supabase from "../supabase-client";
 import { Session } from "@supabase/supabase-js"; // Import the Session type
 import { AuthChangeEvent } from "@supabase/supabase-js"; // Import the AuthChangeEvent type
 
-export default function Login() {
+export default function Auth() {
   const [session, setSession] = useState<Session | null>(null); // Define the session type
   const [showButton, setShowButton] = useState(false);
 
