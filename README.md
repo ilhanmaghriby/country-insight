@@ -41,7 +41,7 @@ VITE_SUPABASE_URL = 'your-supabase-url'
 VITE_SUPABASE_API_KEY = 'your-supabase-api-key'
 ```
 
-Create a .env file in the frontend folder with the following format:
+Create a .env file in the backend folder with the following format:
 
 ```
 NVIDIA_BASE_URL = "your-nvidia-base-url"
