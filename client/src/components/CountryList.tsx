@@ -203,7 +203,7 @@ function CountryList() {
         </div>
       ) : (
         // Jika chat belum dimulai, tampilkan daftar negara
-        <div className="min-h-screen place-content-center">
+        <div className="min-h-screen pt-4">
           <div
             className="text-center"
             data-aos="fade-up"
@@ -213,7 +213,7 @@ function CountryList() {
               Hi there<span className="wave">👋</span>
             </h1>
             <div className="grid place-items-center">
-              <h2 className="typing-demo text-2xl font-bold mb-4">
+              <h2 className="typing-demo text-2xl font-bold mb-2">
                 How Can We Help?
               </h2>
             </div>
@@ -221,7 +221,7 @@ function CountryList() {
           <div className="max-w-screen-lg mx-auto px-4 md:px-8 pb-20">
             <div className={`${showAll ? "hide-scrollbar max-h-[500px]" : ""}`}>
               <ul
-                className="mt-8 grid gap-3 md:gap-5 sm:grid-cols-2 lg:grid-cols-3 grid-auto-rows-auto"
+                className="grid gap-3 md:gap-5 sm:grid-cols-2 lg:grid-cols-3 grid-auto-rows-auto"
                 data-aos="zoom-in-up"
                 data-aos-duration="800"
               >
@@ -300,7 +300,7 @@ function CountryList() {
                 ))}
               </ul>
               <div
-                className="text-center my-6"
+                className="text-center my-4"
                 data-aos="zoom-in"
                 data-aos-duration="800"
               >
@@ -315,7 +315,7 @@ function CountryList() {
           </div>
 
           {/* Input Chat (Awal) */}
-          <div className="fixed bottom-0 w-full p-8 bg-white shadow-lg z-10">
+          <div className="fixed bottom-0 w-full p-6 bg-white shadow-lg z-10">
             <div className="relative max-w-md mx-auto">
               <input
                 placeholder="Ask AI"
