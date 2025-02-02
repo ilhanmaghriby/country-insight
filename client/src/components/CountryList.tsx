@@ -203,7 +203,7 @@ function CountryList() {
         </div>
       ) : (
         // Jika chat belum dimulai, tampilkan daftar negara
-        <div className="min-h-screen pt-4">
+        <div className="min-h-screen place-content-center pt-4">
           <div
             className="text-center"
             data-aos="fade-up"

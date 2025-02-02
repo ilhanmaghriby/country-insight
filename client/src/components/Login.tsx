@@ -61,7 +61,7 @@ export default function Login() {
     );
   } else {
     return (
-      <div className="flex justify-end">
+      <div className="absolute top-0 right-0">
         <div className="shrink-0 group block mt-3 mr-4">
           <div className="flex items-center" onClick={handleProfileClick}>
             <img
