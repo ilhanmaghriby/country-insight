@@ -1,6 +1,8 @@
 import { useQuery, gql } from "@apollo/client";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // Definisi tipe untuk struktur data negara
 interface Language {
@@ -51,6 +53,7 @@ function CountryList() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null); // Ref untuk menentukan posisi scroll ke bawah
 
+  AOS.init(); // Inisialisasi AOS
   const scrollToBottom = () => {
     // Scroll otomatis ke bawah setiap kali ada pesan baru
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -60,9 +63,11 @@ function CountryList() {
     scrollToBottom(); // Memanggil scrollToBottom setiap kali pesan baru ditambahkan
   }, [messages]); // Menggunakan efek untuk melacak perubahan pesan
 
-  const handleSend = async () => {
+  // Fungsi untuk mengirim permintaan ke AI
+  const handleSend = async (message?: string) => {
+    const userMessage = message || input;
     // Validasi input
-    if (!input) {
+    if (!userMessage) {
       console.error("Input is required");
       return;
     }
@@ -77,7 +82,7 @@ function CountryList() {
     // Menambahkan pesan user ke dalam array
     setMessages([
       ...messages,
-      { role: "user", content: input },
+      { role: "user", content: userMessage },
       {
         role: "assistant",
         content: "AI is typing...", // Indikator bahwa AI sedang menulis
@@ -88,7 +93,7 @@ function CountryList() {
       // Kirim permintaan ke server
       const response = await axios.post(
         "http://localhost:3000/generate",
-        { content: input },
+        { content: userMessage },
         { headers: { "Content-Type": "application/json" } }
       );
 
@@ -105,7 +110,7 @@ function CountryList() {
       console.error("Error connecting to API", error);
       setMessages([
         ...messages,
-        { role: "user", content: input },
+        { role: "user", content: userMessage },
         {
           role: "assistant",
           content: "Sorry, something went wrong. Please try again later.",
@@ -114,7 +119,19 @@ function CountryList() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  // Chat dengan AI untuk country tertentu
+  const handleAskAI = (countryName: string) => {
+    const question = `Give me more info about ${countryName} country?`;
+    handleSend(question);
+  };
+
+  // Mengambil data negara saat komponen dimuat
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="loader"></div>
+      </div>
+    );
   if (error) return <p>Error: {error.message}</p>;
 
   // Menentukan jumlah negara yang ditampilkan
@@ -166,7 +183,7 @@ function CountryList() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleSend()}
               />
-              <button onClick={handleSend}>
+              <button onClick={() => handleSend()}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="absolute right-3 top-3 w-5 h-5 text-gray-400"
@@ -186,13 +203,21 @@ function CountryList() {
       ) : (
         // Jika chat belum dimulai, tampilkan daftar negara
         <div className="min-h-screen place-content-center">
-          <div className="text-center">
+          <div
+            className="text-center"
+            data-aos="fade-up"
+            data-aos-duration="800"
+          >
             <h1 className="text-xl text-gray-500">Hi, there👋🏻</h1>
             <p className="text-2xl font-bold mb-4">How Can We Help?</p>
           </div>
-          <div className="max-w-screen-lg mx-auto px-4 md:px-8 pb-20 ">
+          <div className="max-w-screen-lg mx-auto px-4 md:px-8 pb-20">
             <div className={`${showAll ? "hide-scrollbar max-h-[500px]" : ""}`}>
-              <ul className="mt-8 grid gap-3 md:gap-5 sm:grid-cols-2 lg:grid-cols-3 grid-auto-rows-auto">
+              <ul
+                className="mt-8 grid gap-3 md:gap-5 sm:grid-cols-2 lg:grid-cols-3 grid-auto-rows-auto"
+                data-aos="zoom-in-up"
+                data-aos-duration="800"
+              >
                 {displayedCountries?.map((country) => (
                   <li
                     key={country.name}
@@ -204,7 +229,18 @@ function CountryList() {
                   >
                     <div className="flex flex-col justify-between p-4 h-full ">
                       <div className="space-y-2">
-                        <span>{country.emoji}</span>
+                        <h4 className="text-gray-800 text-sm flex justify-between">
+                          {country.emoji}
+                          <span>
+                            <button
+                              className="text-sm font-medium text-gray-500 hover:text-gray-700"
+                              onClick={() => handleAskAI(country.name)}
+                            >
+                              Ask AI
+                            </button>
+                          </span>
+                        </h4>
+
                         <h3 className="font-semibold text-center">
                           {country.name}
                         </h3>
@@ -256,7 +292,11 @@ function CountryList() {
                   </li>
                 ))}
               </ul>
-              <div className="text-center my-6">
+              <div
+                className="text-center my-6"
+                data-aos="zoom-in"
+                data-aos-duration="800"
+              >
                 <button
                   onClick={() => setShowAll(!showAll)}
                   className="bg-gray-600 hover:bg-gray-700 px-4 py-2 text-white rounded-lg"
@@ -277,7 +317,7 @@ function CountryList() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleSend()}
               />
-              <button onClick={handleSend}>
+              <button onClick={() => handleSend()}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="absolute right-3 top-3 w-5 h-5 text-gray-400"
