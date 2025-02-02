@@ -9,29 +9,30 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const apiKey = process.env.NVIDIA_API_KEY; // Ambil API key dari .env
-const baseURL = process.env.NVIDIA_BASE_URL; // Ambil base URL dari .env
+// Configuration OpenAI
+const apiKey = process.env.NVIDIA_API_KEY;
+const baseURL = process.env.NVIDIA_BASE_URL;
 
-// Inisialisasi OpenAI
+// Initialization OpenAI
 const openai = new OpenAI({
   apiKey: apiKey,
   baseURL: baseURL,
 });
 
-// Endpoint untuk mengirim permintaan ke AI
+// Endpoint to send a request to AI
 app.post("/generate", async (req, res) => {
   try {
     console.log("Received request:", req.body); // Debugging
 
-    const { content } = req.body; // Dapatkan data input dari frontend
+    const { content } = req.body; // Get input data from the frontend
 
-    // Validasi data
+    // Input validation
     if (!content) {
       console.error("Content is missing in request!");
       return res.status(400).json({ error: "Content is required" });
     }
 
-    // Kirim data input ke AI
+    // Generate response
     const completion = await openai.chat.completions.create({
       model: "meta/llama-3.1-405b-instruct",
       messages: [{ role: "user", content }],
@@ -40,10 +41,9 @@ app.post("/generate", async (req, res) => {
       max_tokens: 1024,
     });
 
-    // Ambil respon dari AI
+    // Response handling
     const responseText =
       completion.choices[0]?.message?.content || "No response from AI";
-
     res.json({ result: responseText });
   } catch (error) {
     console.error("Error generating response:", error);
@@ -51,5 +51,5 @@ app.post("/generate", async (req, res) => {
   }
 });
 
-// Mulai server di port 3000
+// Start the server
 app.listen(3000, () => console.log("Server is running on port 3000"));
