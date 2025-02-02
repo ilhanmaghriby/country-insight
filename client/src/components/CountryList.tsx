@@ -1,6 +1,7 @@
 import { useQuery, gql } from "@apollo/client";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import ReactMarkdown from "react-markdown";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -166,7 +167,7 @@ function CountryList() {
                       : "bg-white text-gray-700 border border-gray-300"
                   }`}
                 >
-                  {msg.content}
+                  <ReactMarkdown>{msg.content}</ReactMarkdown>
                 </span>
               </div>
             ))}
