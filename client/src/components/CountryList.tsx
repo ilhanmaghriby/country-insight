@@ -4,6 +4,7 @@ import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Auth from "./Auth";
 
 // Definition of type for country data structure
 interface Language {
@@ -145,6 +146,7 @@ function CountryList() {
 
   return (
     <div className="bg-white min-h-screen">
+      <Auth />
       {/* If the chat has started, only display the chat */}
       {chatStarted ? (
         <div className="flex flex-col min-h-screen">
