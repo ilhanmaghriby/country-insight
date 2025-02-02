@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Country Chatbot is a web-based application that allows users to interact with an AI assistant to get information about various countries. The frontend displays a list of countries along with details such as capitals, currencies, and languages. Users can also start a conversation with the AI assistant to learn more about a specific country. The backend uses the LLaMA model from OpenAI to generate AI responses based on user queries.
+Country Insight is a web-based application that allows users to interact with an AI assistant to get information about various countries. The frontend displays a list of countries along with details such as capitals, currencies, and languages. Users can also start a conversation with the AI assistant to learn more about a specific country. The backend uses the LLaMA model from OpenAI to generate AI responses based on user queries.
 
 ## Setup Instructions
 
@@ -68,7 +68,7 @@ The frontend application will be available at `http://localhost:5173`, while the
 
 ## Available Features
 
-- **Country List**: Displays a list of countries with basic information such as name, capital, currency, and language.
+- **Country List**: Displays a list of countries with basic information such as name, capital, currency, language, and continent.
 - **AI Interaction**: Users can click on a country and ask the AI assistant for more detailed information.
 - **User Authentication**: Users can log in with Google using Supabase authentication.
 - **Responsive Design**: The application is designed to adapt to various screen sizes.
