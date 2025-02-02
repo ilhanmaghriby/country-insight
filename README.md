@@ -46,7 +46,6 @@ Create a .env file in the backend folder with the following format:
 ```
 NVIDIA_BASE_URL = "your-nvidia-base-url"
 NVIDIA_API_KEY = "your-nvidia-api-key"
-
 ```
 
 ### 3. Run the Application
