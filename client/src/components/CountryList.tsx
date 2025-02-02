@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-// Definisi tipe untuk struktur data negara
+// Definition of type for country data structure
 interface Language {
   name: string;
 }
@@ -23,7 +23,7 @@ interface CountriesData {
   countries: Country[];
 }
 
-// Query untuk mengambil data negara
+// Query to retrieve country data
 const GET_COUNTRIES = gql`
   query {
     countries {
@@ -42,8 +42,7 @@ const GET_COUNTRIES = gql`
 `;
 
 function CountryList() {
-  const { loading, error, data } = useQuery<CountriesData>(GET_COUNTRIES); // Menggunakan hook useQuery untuk mengambil data negara
-
+  const { loading, error, data } = useQuery<CountriesData>(GET_COUNTRIES);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [showAll, setShowAll] = useState(false);
   const [chatStarted, setChatStarted] = useState(false);
@@ -52,62 +51,66 @@ function CountryList() {
   );
   const [input, setInput] = useState("");
 
-  const messagesEndRef = useRef<HTMLDivElement>(null); // Ref untuk menentukan posisi scroll ke bawah
+  // Ref to determine scroll position downward
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  AOS.init(); // Inisialisasi AOS
+  // Initialization of AOS (Animate On Scroll)
+  AOS.init();
+
+  // Automatically scroll down every time there is a new message
   const scrollToBottom = () => {
-    // Scroll otomatis ke bawah setiap kali ada pesan baru
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Using effects to track message changes
   useEffect(() => {
-    scrollToBottom(); // Memanggil scrollToBottom setiap kali pesan baru ditambahkan
-  }, [messages]); // Menggunakan efek untuk melacak perubahan pesan
+    scrollToBottom();
+  }, [messages]);
 
-  // Fungsi untuk mengirim permintaan ke AI
+  // Function to send a request to AI
   const handleSend = async (message?: string) => {
     const userMessage = message || input;
-    // Validasi input
+    // Input validation
     if (!userMessage) {
       console.error("Input is required");
       return;
     }
+    // Reset input fields after sending a message
+    setInput("");
 
-    setInput(""); // Reset kolom input setelah mengirim pesan
-
-    // Menandai bahwa chat telah dimulai
+    // Mark that the chat has started
     if (!chatStarted) {
       setChatStarted(true);
     }
 
-    // Menambahkan pesan user ke dalam array
+    // Add the user's message to the array
     setMessages([
       ...messages,
       { role: "user", content: userMessage },
       {
         role: "assistant",
-        content: "AI is typing...", // Indikator bahwa AI sedang menulis
+        content: "AI is typing...", // Indicator that the AI is typing
       },
     ]);
 
     try {
-      // Kirim permintaan ke server
+      // Send a request to the server
       const response = await axios.post(
         "http://localhost:3000/generate",
         { content: userMessage },
         { headers: { "Content-Type": "application/json" } }
       );
 
-      // Update pesan dengan respons dari AI
+      // Update the message with the response from AI
       setMessages((prevMessages) => [
-        ...prevMessages.slice(0, prevMessages.length - 1), // Menghapus pesan "AI is typing..."
+        ...prevMessages.slice(0, prevMessages.length - 1), // Remove the typing indicator
         {
           role: "assistant",
-          content: response.data.result || "No response from AI", // Menampilkan respons dari AI
+          content: response.data.result || "No response from AI", // Handle empty response
         },
       ]);
     } catch (error) {
-      // Tangani kesalahan
+      // Handle errors
       console.error("Error connecting to API", error);
       setMessages([
         ...messages,
@@ -120,13 +123,13 @@ function CountryList() {
     }
   };
 
-  // Chat dengan AI untuk country tertentu
+  // Function to ask AI about a specific country
   const handleAskAI = (countryName: string) => {
     const question = `Give me more info about ${countryName} country?`;
     handleSend(question);
   };
 
-  // Mengambil data negara saat komponen dimuat
+  // Loading and error handling
   if (loading)
     return (
       <div className="flex justify-center items-center h-screen">
@@ -135,14 +138,14 @@ function CountryList() {
     );
   if (error) return <p>Error: {error.message}</p>;
 
-  // Menentukan jumlah negara yang ditampilkan
+  // Determine the number of countries to display
   const displayedCountries = showAll
     ? data?.countries
     : data?.countries.slice(0, 6);
 
   return (
     <div className="bg-white min-h-screen">
-      {/* Jika chat sudah dimulai, hanya tampilkan chat */}
+      {/* If the chat has started, only display the chat */}
       {chatStarted ? (
         <div className="flex flex-col min-h-screen">
           <div className="p-4">
@@ -202,7 +205,7 @@ function CountryList() {
           </div>
         </div>
       ) : (
-        // Jika chat belum dimulai, tampilkan daftar negara
+        // If the chat hasn't started, display the list of countries
         <div className="min-h-screen place-content-center pt-4">
           <div
             className="text-center"
@@ -264,7 +267,7 @@ function CountryList() {
                           </span>
                         </h4>
 
-                        {/* Tampilkan informasi tambahan jika negara yang dipilih */}
+                        {/* Display additional information when a country is selected */}
                         {selectedCountry === country && (
                           <>
                             <h4 className="text-gray-800 text-sm flex justify-between">
@@ -314,7 +317,7 @@ function CountryList() {
             </div>
           </div>
 
-          {/* Input Chat (Awal) */}
+          {/* Input Chat */}
           <div className="fixed bottom-0 w-full p-6 bg-white shadow-lg z-10">
             <div className="relative max-w-md mx-auto">
               <input
