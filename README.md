@@ -31,6 +31,24 @@ cd server
 npm install
 ```
 
+### 3. Configure Environment Variables
+
+Create a .env file in the frontend folder with the following format:
+
+```
+VITE_COUNTRY_URL = 'https://countries.trevorblades.com/'
+VITE_SUPABASE_URL = 'your-supabase-url'
+VITE_SUPABASE_API_KEY = 'your-supabase-api-key'
+```
+
+Create a .env file in the frontend folder with the following format:
+
+```
+NVIDIA_BASE_URL = "your-nvidia-base-url"
+NVIDIA_API_KEY = "your-nvidia-api-key"
+
+```
+
 ### 3. Run the Application
 
 #### Run the Frontend:
